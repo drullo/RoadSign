@@ -1,0 +1,54 @@
+#parent {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    height: 100vh;
+    font-weight: bold;
+}
+
+#time {
+    font-size: 24em;
+}
+
+#date {
+    font-size: 9em;
+    color: #05467A;
+}
+
+#ampm {
+    color: #5D5D5D;
+}
+
+/* The following is a flex layout, instead of grid */
+
+/*#parent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    font-weight: bold;
+    height: 80vh;
+    padding-top: 20vh;
+}
+
+#parent div {
+    display: flex;
+    justify-content: center;
+}
+
+#parent div:nth-child(1) {
+    font-size: 24em;
+}
+
+#parent div:nth-child(2) {
+    font-size: 10em;
+    color: #05467A;
+}
+
+#ampm {
+    color: #5D5D5D;
+    
+    margin-left: .25em;
+}*/

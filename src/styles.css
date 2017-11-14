@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+.ui-overlaypanel {
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+}
+
+.ui-overlaypanel i {
+    margin-right: 1em;
+}
+
+.ui-overlaypanel #pausestatus {
+    font-weight: bold;
+    color: #FFCE20;
+}
+
+.ui-overlaypanel #resume {
+    /*color: #73FF28;*/
+    background-color: #006E00;
+    border-radius: 2px;
+    padding: .3em;
+    margin-left: 3em;
+}
+
+.ui-overlaypanel #resume:hover {
+    background-color: #008300;
+    cursor: pointer;
+}

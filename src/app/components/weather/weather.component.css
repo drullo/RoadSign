@@ -1,0 +1,75 @@
+#parent {
+  display: grid;
+  grid-template-columns: .7fr 1fr;
+  grid-template-rows: 90vh;
+  margin: 2em;
+  font-weight: bold;
+}
+
+#icon {
+  text-align: center;
+}
+
+#icon img {
+  width: 30vw;
+  height: auto;
+}
+
+#weather {
+  font-size: 5em;
+  /*font-weight: bold;*/
+  color: #05467A;
+}
+
+#data {
+  font-size: 4em;
+  display: grid;
+  grid-template-rows: 4.1em;
+  padding-top: 0;
+}
+
+#temp {
+  /*font-weight: bold;*/
+  font-size: 3.5em;
+  line-height: 1;
+}
+
+/* The following is a flex layout, instead of grid */
+
+/*#parent {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  padding: 2em;
+}
+
+#icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40vw;
+    font-size: 4em;
+}
+
+#data {
+  padding-left: 2em;
+  font-size: 4em;
+}
+
+#data div {
+  margin-bottom: 35px;
+}
+
+#weather {
+  font-weight: bold;
+}
+
+#temp {
+  font-weight: bold;
+  font-size: 3em;
+}
+
+img {
+  width: 30vw;
+  height: auto;
+}*/

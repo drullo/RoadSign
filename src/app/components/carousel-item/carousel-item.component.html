@@ -1,0 +1,10 @@
+<div class="carousel-item" [id]="type" *ngIf="visible" [class.active]="isFirst">
+  <date-time                                            *ngIf="type == 'date-time'"></date-time>
+  <customer-visits  (gotData)="gotDataInternal($event)" *ngIf="type == 'customer-visits'"></customer-visits>
+  <rotating-images  (gotData)="gotDataInternal($event)" *ngIf="type == 'rotating-images'"></rotating-images>
+  <holidays         (gotData)="gotDataInternal($event)" *ngIf="type == 'holidays'"></holidays>
+  <weather          (gotData)="gotDataInternal($event)" *ngIf="type == 'weather'"></weather>
+</div>
+<div class="carousel-item" *ngIf="visible">
+  <logo></logo>
+</div>

@@ -1,20 +1,60 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://blog.angular.io//">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- Banner that gets displayed at the top when you pause the slideshow by clicking the carousel -->
+<p-overlayPanel #op [dismissable]="false">
+  <i class="fa fa-pause" aria-hidden="true"></i>
+  <span id="pausestatus">Slideshow Paused</span>
+  <span id="resume" (click)="resume(); op.hide();">
+      <i class="fa fa-play" aria-hidden="true"></i> Resume Slideshow
+  </span>
+  <!-- <span>- Click page and choose '<span id="resume">Resume Slideshow</span>' from the menu to continue.</span> -->
+</p-overlayPanel>
 
+<!-- Carousel -->
+<div #carousel class="carousel slide" data-ride="carousel" data-interval="20000" data-pause="false" (click)="op.show($event); onCarouselClick();">
+  <div #carouselinner class="carousel-inner">
+    <carousel-item [type]="'date-time'" [isFirst]="true"></carousel-item>
+    <carousel-item [type]="'customer-visits'" (gotData)="gotData($event, 'customer-visits')"></carousel-item>
+    <carousel-item [type]="'rotating-images'" (gotData)="gotData($event, 'rotating-images')"></carousel-item>
+    <carousel-item [type]="'holidays'"        (gotData)="gotData($event, 'holidays')"></carousel-item>
+    <carousel-item [type]="'weather'"         (gotData)="gotData($event, 'weather')"></carousel-item>
+  </div>
+</div>
+
+<!-- Modal menu that gets displayed when you click the carousel -->
+<p-dialog [(visible)]="displayMenu" [modal]="true">
+    <p-header>
+        Slideshow Menu
+    </p-header>
+    
+    <!-- Customer Visists -->
+    <div class="menu" id="menu-customer-visits">
+      <button pButton type="button" icon="fa-handshake-o" label="Go to Customer Visits" (click)="goToSlide('customer-visits')"></button>
+      <button pButton type="button" icon="fa-handshake-o" label="Get Next Customer Visit" (click)="getNextItem('customer-visits')" class="ui-button-info"></button>
+    </div>
+
+    <!-- Rotating Images -->
+    <div class="menu" id="menu-rotating-images">
+      <button pButton type="button" icon="fa-picture-o" label="Go to Rotating Images" (click)="goToSlide('rotating-images')"></button>
+      <button pButton type="button" icon="fa-picture-o" label="Get Next Rotating Image" (click)="getNextItem('rotating-images')" class="ui-button-info"></button>
+    </div>
+
+    <!-- Holidays -->
+    <div class="menu" id="menu-holidays">
+      <button pButton type="button" icon="fa-tree" label="Go to Holidays" (click)="goToSlide('holidays')"></button>
+      <button pButton type="button" icon="fa-tree" label="Get Next Holiday" (click)="getNextItem('holidays')" class="ui-button-info"></button>
+    </div>
+
+    <div class="menu">
+      <!-- Weather -->
+      <button id="weather-button" pButton type="button" icon="fa-bolt" label="Go to Weather" (click)="goToSlide('weather')"></button>
+
+      <!-- Date/Time -->
+      <button id="date-time-button" pButton type="button" icon="fa-clock-o" label="Go to Date/Time" (click)="goToSlide('date-time')"></button>
+
+      <!-- Resume -->
+      <button id="resume-button" pButton type="button" icon="fa-play" label="Resume Slideshow" class="ui-button-success" (click)="resume(); op.hide();"></button>
+    </div>
+
+    <p-footer>
+      <p-checkbox binary="true" [(ngModel)]="closeMenuOnItemSelected" label="Close the menu after making your selection"></p-checkbox>
+    </p-footer>
+</p-dialog>

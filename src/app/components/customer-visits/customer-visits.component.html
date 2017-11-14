@@ -1,0 +1,7 @@
+<div *ngIf="visit" id="parent">
+  <div>Cleaveland/Price would like to welcome:</div>
+  <div>
+    <img [src]="logoURL" *ngIf="logoURL" />
+    <div *ngIf="!logoURL">{{ visit.ows_Title }}</div>
+  </div>
+</div>

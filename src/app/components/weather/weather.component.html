@@ -1,0 +1,43 @@
+<div id="parent" *ngIf="weatherCondition">
+  <!-- Weather image and description (Partly Cloudy, etc.) -->
+  <div id="icon" *ngIf="icons">
+    <div *ngIf="icon"><img [src]="icon" /></div>
+    <div id="weather" *ngIf="weatherCondition.weather">{{ weatherCondition.weather }}</div>
+  </div>
+  <!-- Details about weather -->
+  <div id="data" class="alert alert-dark">
+    <!-- Temperature -->
+    <div id="temp" *ngIf="weatherCondition.temp_f">
+      {{ weatherCondition.temp_f | number:'1.0-0' }}° F
+    </div>
+    <!-- Feels Like - only show if it's more than a 5° difference from the real temperature -->
+    <div *ngIf="weatherCondition.feelslike_f && weatherCondition.feelslike_f != weatherCondition.temp_f && (weatherCondition.temp_f > (weatherCondition.feelslike_f + 5) || weatherCondition.temp_f < (weatherCondition.feelslike_f - 5))">
+      Feels Like {{ weatherCondition.feelslike_f | number:'1.0-0' }}° F
+    </div>
+    <!-- Windchill - only show if it's not 'NA' -->
+    <div *ngIf="weatherCondition.windchill_f && weatherCondition.windchill_f != 'NA'">
+      Windchill {{ weatherCondition.windchill_f | number:'1.0-0' }}° F
+    </div>
+    <!-- Heat Index - only show if it's not 'NA' -->
+    <div *ngIf="weatherCondition.heat_index_f && weatherCondition.heat_index_f != 'NA'">
+      Heat Index {{ weatherCondition.heat_index_f | number:'1.0-0' }}° F
+    </div>
+    <!-- Wind -->
+    <div *ngIf="weatherCondition.wind_string">
+      Wind {{ weatherCondition.wind_string }}
+    </div>
+    <!-- Precipitation - only show if it's actually reading more than 0 inches -->
+    <!--    Rather than use parseInt (since precip_today_in is a string), I'm using the unary '+' operator as a prefix -->
+    <div *ngIf="weatherCondition.precip_today_in && +weatherCondition.precip_today_in > 0">
+      {{ weatherCondition.precip_today_in | number:'1.0-0' }}" Precipitation Today
+    </div>
+    <!-- Humidity -->
+    <div *ngIf="weatherCondition.relative_humidity">
+      {{ weatherCondition.relative_humidity }} Humidity
+    </div>
+    <!-- Visibility -->
+    <div *ngIf="weatherCondition.visibility_mi">
+      Visibility {{ weatherCondition.visibility_mi | number:'1.0-0' }} Miles
+    </div>
+  </div>
+</div>
